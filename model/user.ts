@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-const mongoosePW = require("../config/userinfo.json");
 
 let db = mongoose.connection;
 
