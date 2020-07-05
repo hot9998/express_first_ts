@@ -21,24 +21,8 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
+  email: String,
   admin: { type: Boolean, default: false },
 });
-
-type userType = {
-  username: string;
-  password: string;
-};
-
-userSchema.statics.create = function (user: userType) {
-  const createUser = new this({
-    ...user,
-  });
-};
-
-userSchema.statics.findOne = function (username: string) {
-  return this.findOne({
-    username,
-  }).exec();
-};
 
 module.exports = mongoose.model("User", userSchema);
