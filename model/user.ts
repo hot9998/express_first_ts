@@ -12,32 +12,27 @@ db.once("open", function () {
 });
 
 mongoose.connect(
-  "mongodb+srv://hot9998:" +
-    mongoosePW.mongoosePW +
-    "@cluster0-gcuoo.mongodb.net/test?retryWrites=true&w=majority",
+  "mongodb://root:kmov1234@localhost:27017/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false",
   { useUnifiedTopology: true, useNewUrlParser: true }
 );
 
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  id: String,
   username: String,
   password: String,
   admin: { type: Boolean, default: false },
 });
 
 type userType = {
-  id: string;
   username: string;
   password: string;
 };
 
 userSchema.statics.create = function (user: userType) {
   const createUser = new this({
-    user,
+    ...user,
   });
-  return createUser.save();
 };
 
 userSchema.statics.findOne = function (username: string) {
